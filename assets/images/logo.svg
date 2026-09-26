@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Ladies Living Legacy emblem">
+  <!-- PLACEHOLDER EMBLEM. Replace this file with your real logo (same name),
+       or save your logo as logo.png and update the <img src> in index.html. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a1f2f"/>
+      <stop offset="0.45" stop-color="#d0542d"/>
+      <stop offset="0.75" stop-color="#f3a23a"/>
+      <stop offset="1" stop-color="#f7d27a"/>
+    </linearGradient>
+    <path id="top" d="M34 100a66 66 0 0 1 132 0"/>
+    <path id="bottom" d="M40 104a60 60 0 0 0 120 0"/>
+    <clipPath id="inner"><circle cx="100" cy="100" r="50"/></clipPath>
+  </defs>
+
+  <circle cx="100" cy="100" r="98" fill="#f7ecd6"/>
+  <circle cx="100" cy="100" r="92" fill="#6b1a2a"/>
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#e7c173" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="54" fill="#f7ecd6"/>
+
+  <text font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="17" fill="#f7ecd6" letter-spacing="1">
+    <textPath href="#top" startOffset="50%" text-anchor="middle">Ladies Living Legacy</textPath>
+  </text>
+  <text font-family="Georgia, serif" font-size="11" fill="#f7ecd6" letter-spacing="1.5">
+    <textPath href="#bottom" startOffset="50%" text-anchor="middle" dominant-baseline="hanging">IWD 2027 Summit · Kenya</textPath>
+  </text>
+  <circle cx="30" cy="102" r="3" fill="#e7c173"/>
+  <circle cx="170" cy="102" r="3" fill="#e7c173"/>
+
+  <g clip-path="url(#inner)">
+    <rect x="40" y="40" width="120" height="120" fill="url(#sky)"/>
+    <circle cx="100" cy="118" r="22" fill="#fbe29b" opacity="0.9"/>
+    <!-- ground -->
+    <path d="M40 124c20-6 40-8 60-6s40 4 60-2v44H40Z" fill="#3d5a2a"/>
+    <path d="M40 134c20-4 40-5 60-3s40 3 60 0v29H40Z" fill="#2b1810"/>
+    <!-- three women, arms raised -->
+    <g fill="#2b1810">
+      <circle cx="78" cy="86" r="6"/>
+      <path d="M70 128l2-30c-4-5-8-12-10-20l4-1c3 7 6 12 12 14 6-2 9-7 12-14l4 1c-2 8-6 15-10 20l2 30Z"/>
+      <circle cx="100" cy="78" r="6.5"/>
+      <path d="M91 128l2-34c-5-6-9-14-11-23l4-1c3 8 7 14 14 16 7-2 11-8 14-16l4 1c-2 9-6 17-11 23l2 34Z"/>
+      <circle cx="122" cy="86" r="6"/>
+      <path d="M114 128l2-30c-4-5-8-12-10-20l4-1c3 7 6 12 12 14 6-2 9-7 12-14l4 1c-2 8-6 15-10 20l2 30Z"/>
+    </g>
+    <!-- Africa silhouette -->
+    <path d="M94 136c3-2 7-2 10 0l3 4-1 5-3 4-2 6-3-3-1-5-3-4-2-4Z" fill="#f7ecd6"/>
+  </g>
+  <circle cx="100" cy="100" r="50" fill="none" stroke="#e7c173" stroke-width="2"/>
+</svg>
