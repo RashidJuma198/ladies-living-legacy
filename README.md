@@ -60,7 +60,7 @@ All paths are relative, so no other configuration is needed.
 ## 5. Live-site checklist
 
 - [ ] Page loads with no broken images (logo shows in the hero and the browser tab)
-- [ ] The countdown shows the right number of days
+- [ ] The countdown shows the right days, hours, minutes and seconds
 - [ ] Header links scroll smoothly to The journey / Stay and fees / Good to know
 - [ ] On a phone the ☰ button opens and closes the menu, and tapping a link closes it
 - [ ] Clicking a numbered stop on the sunrise jumps to that day

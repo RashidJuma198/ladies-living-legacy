@@ -30,7 +30,7 @@ const EVENT_CONFIG = {
   /* ---- EVENT DETAILS (shown throughout the page) ---------------------- */
   eventName: "Ladies Living Legacy",
   eventSubtitle: "International Women's Day Summit",
-  startDate: "2027-03-04",           // YYYY-MM-DD, drives the "days until" countdown
+  startDate: "2027-03-04",           // YYYY-MM-DD, the countdown runs to midnight Kenya time on this day
   endDate: "2027-03-15",             // YYYY-MM-DD
   dateText: "March 4th – 15th, 2027",
   durationText: "11 days, 11 nights",
@@ -48,12 +48,6 @@ document.documentElement.classList.add("js");
 
 /** True when a config value is a real web address (not a placeholder). */
 const isUrl = (value) => typeof value === "string" && /^https?:\/\//i.test(value.trim());
-
-/** Parse "YYYY-MM-DD" as a local date (avoids timezone off-by-one). */
-function parseLocalDate(str) {
-  const [y, m, d] = str.split("-").map(Number);
-  return new Date(y, m - 1, d);
-}
 
 /* ---------- 1. Fill in configurable text & links ---------- */
 function applyConfig() {
@@ -113,32 +107,52 @@ function setupRegistration() {
   frame.classList.add("has-form");
 }
 
-/* ---------- 3. Countdown ("159 days until we gather & make history together") ---------- */
+/* ---------- 3. Countdown (days, hours, minutes and seconds until the summit) ---------- */
 function setupCountdown() {
   const el = document.getElementById("countdown");
   if (!el) return;
-  const num = el.querySelector(".countdown-num");
+  const clock = el.querySelector(".countdown-clock");
   const text = el.querySelector(".countdown-text");
+  const nums = {};
+  el.querySelectorAll(".countdown-num").forEach((n) => { nums[n.dataset.unit] = n; });
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const start = parseLocalDate(EVENT_CONFIG.startDate);
-  const end = parseLocalDate(EVENT_CONFIG.endDate);
-  const days = Math.round((start - today) / 86400000);
+  // Count to midnight Kenya time (EAT, UTC+3) so every visitor sees the same moment
+  const toKenyaMidnight = (str) => {
+    const [y, m, d] = str.split("-").map(Number);
+    return Date.UTC(y, m - 1, d) - 3 * 3600000;
+  };
+  const start = toKenyaMidnight(EVENT_CONFIG.startDate);
+  const end = toKenyaMidnight(EVENT_CONFIG.endDate) + 86400000;
+  const pad = (n) => String(n).padStart(2, "0");
+  let timer;
 
-  if (days > 1) {
-    num.textContent = days;
-    text.textContent = "days until we gather & make history together";
-  } else if (days === 1) {
-    num.textContent = "1";
-    text.textContent = "day until we gather & make history together";
-  } else if (today <= end) {
-    num.textContent = "";
-    text.textContent = "The summit is happening now";
-  } else {
-    num.textContent = "";
-    text.textContent = "Thank you for being part of the legacy";
-  }
+  const tick = () => {
+    const now = Date.now();
+    const left = start - now;
+
+    if (left > 0) {
+      const secs = Math.floor(left / 1000);
+      const d = Math.floor(secs / 86400);
+      const h = Math.floor((secs % 86400) / 3600);
+      const m = Math.floor((secs % 3600) / 60);
+      nums.days.textContent = d;
+      nums.hours.textContent = pad(h);
+      nums.minutes.textContent = pad(m);
+      nums.seconds.textContent = pad(secs % 60);
+      el.setAttribute("aria-label", `${d} days, ${h} hours and ${m} minutes until we gather & make history together`);
+      return;
+    }
+
+    clearInterval(timer);
+    clock.hidden = true;
+    el.removeAttribute("aria-label");
+    text.textContent = now < end
+      ? "The summit is happening now"
+      : "Thank you for being part of the legacy";
+  };
+
+  tick();
+  timer = setInterval(tick, 1000);
 }
 
 /* ---------- 4. Header: mobile menu + scrolled state + active link ---------- */

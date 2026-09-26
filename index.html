@@ -141,8 +141,14 @@
         </div>
 
         <!-- Filled in automatically by script.js from EVENT_CONFIG.startDate -->
-        <p class="countdown" id="countdown" aria-live="polite">
-          <span class="countdown-num">&nbsp;</span> <em class="countdown-text">days until we gather &amp; make history together</em>
+        <p class="countdown" id="countdown" role="timer">
+          <span class="countdown-clock" aria-hidden="true">
+            <span class="countdown-unit"><span class="countdown-num" data-unit="days">&nbsp;</span><span class="countdown-label">Days</span></span>
+            <span class="countdown-unit"><span class="countdown-num" data-unit="hours">&nbsp;</span><span class="countdown-label">Hours</span></span>
+            <span class="countdown-unit"><span class="countdown-num" data-unit="minutes">&nbsp;</span><span class="countdown-label">Minutes</span></span>
+            <span class="countdown-unit"><span class="countdown-num" data-unit="seconds">&nbsp;</span><span class="countdown-label">Seconds</span></span>
+          </span>
+          <em class="countdown-text">until we gather &amp; make history together</em>
         </p>
       </div>
 
